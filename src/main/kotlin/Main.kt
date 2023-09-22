@@ -1,6 +1,8 @@
 package me.sirsam.minigameplugin
 
 import me.sirsam.minigameplugin.commands.Start
+import me.sirsam.minigameplugin.listeners.OnJoin
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin() {
@@ -28,6 +30,6 @@ class Main : JavaPlugin() {
     }
 
     private fun registerEvents() {
-        //Bukkit.getPluginManager().registerEvents(OnInventoryClick(), this)
+        Bukkit.getPluginManager().registerEvents(OnJoin(), this)
     }
 }

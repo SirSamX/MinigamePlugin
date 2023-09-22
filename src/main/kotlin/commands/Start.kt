@@ -18,6 +18,7 @@ class Start : CommandExecutor, TabCompleter {
         if (sender !is Player) { /*utils.notPlayerMessage(sender)*/; return true }
         if (Game.state != Game.Gamestate.INACTIVE) { return true }
 
+        sender.sendMessage(Component.text("Game starts!"))
         Teams.values().forEach {
             if (sender.inventory.itemInMainHand.type != it.woolType) { return true }
 
