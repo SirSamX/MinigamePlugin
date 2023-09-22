@@ -7,14 +7,12 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin() {
     companion object {
-        private lateinit var instance: Main
-
-        fun getPlugin(): Main {
-            return instance
-        }
+        lateinit var instance: Main
     }
 
     override fun onEnable() {
+        instance = this
+
         registerEvents()
         registerCommands()
 

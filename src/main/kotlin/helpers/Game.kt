@@ -1,15 +1,16 @@
 package me.sirsam.minigameplugin.helpers
 
+import org.bukkit.entity.Player
+
 object Game {
-    enum class Gamestate {
+    enum class State {
         INACTIVE,
-        WAITING,
         STARTING,
-        WARMUP,
         RUNNING,
         DEATHMATCH,
         END;
     }
 
-    var state = Gamestate.INACTIVE
+    var state = State.INACTIVE
+    var teams = mutableMapOf<Player, Teams>()
 }

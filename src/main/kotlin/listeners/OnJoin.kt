@@ -1,6 +1,5 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.Main
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.event.EventHandler
@@ -11,6 +10,5 @@ class OnJoin : Listener {
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
         event.player.sendMessage(Component.text("Welcome to the MiniGames Server!", NamedTextColor.GREEN))
-
     }
 }
