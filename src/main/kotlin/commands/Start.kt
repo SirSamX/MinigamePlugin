@@ -19,17 +19,6 @@ class Start : CommandExecutor, TabCompleter {
         if (sender !is Player) { /*utils.notPlayerMessage(sender)*/; return true }
         if (Game.state != Game.State.INACTIVE) { return true }
 
-        sender.sendMessage(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
-        for (team in Teams.values()) {
-            for (player in Bukkit.getOnlinePlayers()) {
-                val item = player.inventory.itemInMainHand.type
-                if (item == team.woolType) {
-                    Game.teams[player] = team
-                    Utilities.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponent()). append(Component.text("!", NamedTextColor.YELLOW)))
-                }
-            }
-        }
-
         Game.state = Game.State.STARTING
         Countdown().runTaskTimer(Main.instance, 20, 20)
 
@@ -41,8 +30,20 @@ class Start : CommandExecutor, TabCompleter {
 
         override fun run() {
             if (i <= 0) {
+                Utilities.broadcast(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
+                for (team in Teams.values()) {
+                    for (player in Bukkit.getOnlinePlayers()) {
+                        val item = player.inventory.itemInMainHand.type
+                        if (item == team.woolType) {
+                            Game.teams[player] = team
+                            Utilities.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponent()). append(Component.text("!", NamedTextColor.YELLOW)))
+                        } else {
+                            Utilities.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
+                        }
+                    }
+                }
                 Utilities.broadcast(Component.text("Game starts now!", NamedTextColor.YELLOW))
-                Game.state = Game.State.INACTIVE
+                Game.state = Game.State.INACTIVE // FIXME: REMOVE THIS LATER
                 cancel()
             } else {
                 Utilities.broadcast(Component.text("Game starts in ${i}s!", NamedTextColor.YELLOW))
