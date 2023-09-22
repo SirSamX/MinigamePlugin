@@ -1,0 +1,13 @@
+name: MinigamePlugin
+version: ${version}
+main: me.sirsam.minigameplugin.Main
+description: Minigames Plugin
+author: SirSam
+api-version: "1.20"
+
+commands:
+  start:
+    description: Starts the Game.
+    permission: op
+    permission-message: You do not have permission to use this Command!
+    usage: /<command>
