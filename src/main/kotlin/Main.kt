@@ -3,8 +3,8 @@ package me.sirsam.minigameplugin
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.ShopItems
 import me.sirsam.minigameplugin.commands.Start
-import me.sirsam.minigameplugin.listeners.DisabledEvents
-import me.sirsam.minigameplugin.listeners.OnJoin
+import me.sirsam.minigameplugin.helpers.WorldController
+import me.sirsam.minigameplugin.listeners.*
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -16,8 +16,11 @@ class Main : JavaPlugin() {
     override fun onEnable() {
         instance = this
 
-        registerEvents()
         registerCommands()
+        registerEvents()
+        server.worlds.forEach {
+            WorldController(it).setup()
+        }
 
         logger.info("Plugin enabled!")
     }
@@ -35,5 +38,8 @@ class Main : JavaPlugin() {
     private fun registerEvents() {
         Bukkit.getPluginManager().registerEvents(OnJoin(), this)
         Bukkit.getPluginManager().registerEvents(DisabledEvents(), this)
+        Bukkit.getPluginManager().registerEvents(OnDeath(), this)
+        Bukkit.getPluginManager().registerEvents(OnBreak(), this)
+        Bukkit.getPluginManager().registerEvents(OnMove(), this)
     }
 }
