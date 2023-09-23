@@ -2,6 +2,7 @@ package me.sirsam.minigameplugin
 
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.Start
+import me.sirsam.minigameplugin.helpers.Generators
 import me.sirsam.minigameplugin.listeners.OnJoin
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -31,5 +32,6 @@ class Main : JavaPlugin() {
 
     private fun registerEvents() {
         Bukkit.getPluginManager().registerEvents(OnJoin(), this)
+        Bukkit.getPluginManager().registerEvents(Generators(), this)
     }
 }
