@@ -36,7 +36,8 @@ class Start : CommandExecutor, TabCompleter {
                         val item = player.inventory.itemInMainHand.type
                         if (item == team.woolType) {
                             Game.teams[player] = team
-                            Utilities.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponent()). append(Component.text("!", NamedTextColor.YELLOW)))
+                            Utilities.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW)))
+                            player.inventory.clear()
                         } else {
                             Utilities.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
                         }

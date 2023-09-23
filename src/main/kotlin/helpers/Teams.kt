@@ -21,7 +21,7 @@ enum class Teams(val teamName: String, val chatColor: NamedTextColor, val woolTy
         }
     }
 
-    fun getTeamComponent(): Component {
+    fun getTeamComponeant(): Component {
         return Component.text(teamName, chatColor)
     }
 }
