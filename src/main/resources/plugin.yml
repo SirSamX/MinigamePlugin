@@ -11,3 +11,13 @@ commands:
     permission: op
     permission-message: You do not have permission to use this Command!
     usage: /<command>
+
+  rl:
+    description: Reloads the server.
+    permission: op
+    usage: /<command>
+
+  shop:
+    description: Opens the shop menu
+    permission: op
+    usage: /<command>
