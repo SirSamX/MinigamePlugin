@@ -1,5 +1,6 @@
 package me.sirsam.minigameplugin
 
+import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.Start
 import me.sirsam.minigameplugin.listeners.OnJoin
 import org.bukkit.Bukkit
@@ -25,6 +26,7 @@ class Main : JavaPlugin() {
 
     private fun registerCommands() {
         getCommand("start")?.setExecutor(Start())
+        getCommand("rl")?.setExecutor(Reload())
     }
 
     private fun registerEvents() {
