@@ -44,7 +44,7 @@ class Start : CommandExecutor, TabCompleter {
                     }
                 }
                 Utilities.broadcast(Component.text("Game starts now!", NamedTextColor.YELLOW))
-                Game.state = Game.State.INACTIVE // FIXME: REMOVE THIS LATER
+
                 cancel()
             } else {
                 Utilities.broadcast(Component.text("Game starts in ${i}s!", NamedTextColor.YELLOW))
