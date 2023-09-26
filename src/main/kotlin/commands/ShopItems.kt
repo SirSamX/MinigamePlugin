@@ -11,9 +11,11 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
+import org.bukkit.inventory.Inventory
+import org.bukkit.inventory.InventoryHolder
 import org.bukkit.inventory.ItemStack
 
-class ShopItems : CommandExecutor, TabCompleter {
+class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) return true
         Game.win(Team.RED) //TEMPORARY JUST TO TEST SRY MORITZ
@@ -27,5 +29,9 @@ class ShopItems : CommandExecutor, TabCompleter {
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
         return mutableListOf()
+    }
+
+    override fun getInventory(): Inventory {
+        return inventory
     }
 }
