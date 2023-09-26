@@ -2,8 +2,9 @@ package me.sirsam.minigameplugin.commands
 
 import me.sirsam.minigameplugin.Main
 import me.sirsam.minigameplugin.helpers.Game
-import me.sirsam.minigameplugin.helpers.Teams
-import me.sirsam.minigameplugin.helpers.Utilities
+import me.sirsam.minigameplugin.helpers.PlayerController
+import me.sirsam.minigameplugin.helpers.Team
+import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -20,7 +21,7 @@ class Start : CommandExecutor, TabCompleter {
         if (Game.state != Game.State.INACTIVE) { return true }
 
         Game.state = Game.State.STARTING
-        Countdown().runTaskTimer(Main.instance, 20, 20)
+        Countdown().runTaskTimer(Main.instance, 0, 20)
 
         return true
     }
@@ -30,24 +31,24 @@ class Start : CommandExecutor, TabCompleter {
 
         override fun run() {
             if (i <= 0) {
-                Utilities.broadcast(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
-                for (team in Teams.values()) {
+                Utils.broadcast(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
+                for (team in Team.values()) {
                     for (player in Bukkit.getOnlinePlayers()) {
                         val item = player.inventory.itemInMainHand.type
                         if (item == team.woolType) {
                             Game.teams[player] = team
-                            Utilities.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW)))
-                            player.inventory.clear()
+                            Utils.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW)))
+                            PlayerController(player).bedwarsSetup()
                         } else {
-                            Utilities.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
+                            Utils.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
                         }
                     }
                 }
-                Utilities.broadcast(Component.text("Game starts now!", NamedTextColor.YELLOW))
+                Utils.broadcast(Component.text("Game starts now!", NamedTextColor.YELLOW))
 
                 cancel()
             } else {
-                Utilities.broadcast(Component.text("Game starts in ${i}s!", NamedTextColor.YELLOW))
+                Utils.broadcast(Component.text("Game starts in ${i}s!", NamedTextColor.YELLOW))
             }
 
             i--

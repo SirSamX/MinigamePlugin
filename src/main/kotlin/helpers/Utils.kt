@@ -5,11 +5,17 @@ package me.sirsam.minigameplugin.helpers
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
-import org.bukkit.command.CommandSender
 import org.bukkit.Bukkit
+import org.bukkit.Color
+import org.bukkit.Sound
+import org.bukkit.SoundCategory
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
+import org.bukkit.inventory.meta.LeatherArmorMeta
 
-object Utilities {
+object Utils {
     val prefix = Component.text("Minigames", NamedTextColor.YELLOW).append(Component.text(" >> ", NamedTextColor.GREEN))
 
     fun sendMessage(player: Player, message: Component) { player.sendMessage(prefix.append(message)) }
@@ -35,4 +41,20 @@ object Utilities {
 
     fun isNumeric(input: String): Boolean { return input.toDoubleOrNull() != null }
 
+    fun changeLeatherArmourColor(meta: ItemMeta, color: Color): LeatherArmorMeta {
+        val leatherArmorMeta = meta as LeatherArmorMeta
+        leatherArmorMeta.setColor(color)
+        return leatherArmorMeta
+    }
+
+    fun changeLeatherArmourColor(itemStack: ItemStack, color: Color): ItemStack {
+        itemStack.itemMeta = changeLeatherArmourColor(itemStack.itemMeta, color)
+        return itemStack
+    }
+
+    fun broadcastSound(sound: Sound, soundCategory: SoundCategory, volume: Float, pitch: Float) {
+        Bukkit.getOnlinePlayers().forEach {
+            it.playSound(it, sound, soundCategory, volume, pitch)
+        }
+    }
 }
