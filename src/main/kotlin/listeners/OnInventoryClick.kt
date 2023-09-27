@@ -1,6 +1,7 @@
 package me.sirsam.minigameplugin.listeners
 
 import me.sirsam.minigameplugin.commands.ShopItems
+import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
@@ -23,7 +24,7 @@ class OnInventoryClick : Listener {
                     0 -> {
                         event.isCancelled = true
                         player.inventory.addItem(ItemStack(Material.TNT))
-                        player.sendMessage(Component.text(">>", NamedTextColor.GREEN))
+                        Utils.broadcast(Component.text("You received TNT!", NamedTextColor.GREEN))
                     }
                 }
             }
