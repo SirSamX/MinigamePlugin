@@ -8,6 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.inventory.ItemStack
 
 class OnInventoryClick : Listener {
     @EventHandler
@@ -21,6 +22,8 @@ class OnInventoryClick : Listener {
                 when (event.slot) {
                     0 -> {
                         event.isCancelled = true
+                        player.inventory.addItem(ItemStack(Material.TNT))
+                        player.sendMessage(Component.text(">>", NamedTextColor.GREEN))
                     }
                 }
             }
