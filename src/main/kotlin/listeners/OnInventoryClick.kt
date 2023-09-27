@@ -5,6 +5,8 @@ import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
+import org.bukkit.Sound
+import org.bukkit.SoundCategory
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -30,6 +32,10 @@ class OnInventoryClick : Listener {
                 when (event.slot) {
                     0 -> {
                         buy(Material.TNT)
+                    }
+
+                    1 -> {
+                        buy(Material.DIAMOND)
                     }
                 }
             }
