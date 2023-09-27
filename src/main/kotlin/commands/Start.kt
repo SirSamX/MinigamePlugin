@@ -1,9 +1,9 @@
 package me.sirsam.minigameplugin.commands
 
 import me.sirsam.minigameplugin.Main
-import me.sirsam.minigameplugin.helpers.Game
-import me.sirsam.minigameplugin.helpers.PlayerController
-import me.sirsam.minigameplugin.helpers.Team
+import me.sirsam.minigameplugin.game.Game
+import me.sirsam.minigameplugin.game.PlayerController
+import me.sirsam.minigameplugin.game.Team
 import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor

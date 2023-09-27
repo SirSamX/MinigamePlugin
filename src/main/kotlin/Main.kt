@@ -3,7 +3,7 @@ package me.sirsam.minigameplugin
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.ShopItems
 import me.sirsam.minigameplugin.commands.Start
-import me.sirsam.minigameplugin.helpers.WorldController
+import me.sirsam.minigameplugin.game.WorldController
 import me.sirsam.minigameplugin.listeners.*
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
@@ -42,5 +42,7 @@ class Main : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(OnBreak(), this)
         Bukkit.getPluginManager().registerEvents(OnMove(), this)
         Bukkit.getPluginManager().registerEvents(OnInventoryClick(), this)
+        Bukkit.getPluginManager().registerEvents(OnInteract(), this)
+        Bukkit.getPluginManager().registerEvents(OnProjectileHit(), this)
     }
 }

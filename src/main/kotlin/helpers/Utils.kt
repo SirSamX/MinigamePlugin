@@ -5,10 +5,7 @@ package me.sirsam.minigameplugin.helpers
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
-import org.bukkit.Bukkit
-import org.bukkit.Color
-import org.bukkit.Sound
-import org.bukkit.SoundCategory
+import org.bukkit.*
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -55,6 +52,36 @@ object Utils {
     fun broadcastSound(sound: Sound, soundCategory: SoundCategory, volume: Float, pitch: Float) {
         Bukkit.getOnlinePlayers().forEach {
             it.playSound(it, sound, soundCategory, volume, pitch)
+        }
+    }
+
+    fun destroy(item: ItemStack, quantity: Int) {
+        if (item.amount <= quantity) {
+            item.amount = 0
+        } else {
+            item.amount -= quantity
+        }
+    }
+
+    fun isWool(material: Material): Boolean {
+        return when (material) {
+            Material.WHITE_WOOL,
+            Material.ORANGE_WOOL,
+            Material.MAGENTA_WOOL,
+            Material.LIGHT_BLUE_WOOL,
+            Material.YELLOW_WOOL,
+            Material.LIME_WOOL,
+            Material.PINK_WOOL,
+            Material.GRAY_WOOL,
+            Material.LIGHT_GRAY_WOOL,
+            Material.CYAN_WOOL,
+            Material.PURPLE_WOOL,
+            Material.BLUE_WOOL,
+            Material.BROWN_WOOL,
+            Material.GREEN_WOOL,
+            Material.RED_WOOL,
+            Material.BLACK_WOOL -> true
+            else -> false
         }
     }
 }

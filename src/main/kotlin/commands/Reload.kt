@@ -1,5 +1,8 @@
 package me.sirsam.minigameplugin.commands
 
+import me.sirsam.minigameplugin.helpers.Utils
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -10,11 +13,12 @@ class Reload : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) return true
 
+        Utils.broadcast(Component.text("RELOADING LAG!", NamedTextColor.RED))
         sender.server.reload()
      return true
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String>? {
-        return mutableListOf()
+        return null
     }
 }

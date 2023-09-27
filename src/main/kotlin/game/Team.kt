@@ -1,4 +1,4 @@
-package me.sirsam.minigameplugin.helpers
+package me.sirsam.minigameplugin.game
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor

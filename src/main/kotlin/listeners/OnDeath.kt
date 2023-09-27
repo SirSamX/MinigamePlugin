@@ -1,6 +1,6 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.helpers.PlayerController
+import me.sirsam.minigameplugin.game.PlayerController
 import org.bukkit.Sound
 
 import org.bukkit.event.EventHandler

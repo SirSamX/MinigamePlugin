@@ -1,9 +1,11 @@
 package me.sirsam.minigameplugin.listeners
 
+import me.sirsam.minigameplugin.helpers.Utils
 import org.bukkit.GameMode
+import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.BlockDamageEvent
+import org.bukkit.event.block.BlockExplodeEvent
 import org.bukkit.event.enchantment.EnchantItemEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.inventory.CraftItemEvent
@@ -32,17 +34,19 @@ class DisabledEvents : Listener {
     }
 
     @EventHandler
-    fun onBlockBreak(event: BlockDamageEvent) {
-        event.isCancelled = true
-    }
-
-    @EventHandler
     fun onFoodLevelChange(event: FoodLevelChangeEvent) {
         event.isCancelled = true
     }
 
     @EventHandler
     fun onPlayerSleep(event: PlayerBedEnterEvent) {
+        event.isCancelled = true
+    }
+
+    @EventHandler
+    fun onBlockExplode(event: BlockExplodeEvent) {
+        Utils.broadcast(event.block.type.name)
+        if (event.block.type !in listOf(Material.BLUE_BED, Material.RED_BED, Material.GREEN_BED, Material.YELLOW_BED)) return
         event.isCancelled = true
     }
 }

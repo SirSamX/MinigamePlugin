@@ -1,4 +1,4 @@
-package me.sirsam.minigameplugin.helpers
+package me.sirsam.minigameplugin.game
 
 import org.bukkit.Difficulty
 import org.bukkit.GameRule

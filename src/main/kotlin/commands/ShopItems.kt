@@ -1,7 +1,7 @@
 package me.sirsam.minigameplugin.commands
 
-import me.sirsam.minigameplugin.helpers.Game
-import me.sirsam.minigameplugin.helpers.Team
+import me.sirsam.minigameplugin.game.Game
+import me.sirsam.minigameplugin.game.Team
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -25,8 +25,8 @@ class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
         return true
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
-        return mutableListOf()
+    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String>? {
+        return null
     }
 
     override fun getInventory(): Inventory {

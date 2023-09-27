@@ -1,4 +1,4 @@
-package me.sirsam.minigameplugin.helpers
+package me.sirsam.minigameplugin.game
 
 import me.sirsam.minigameplugin.Main
 import org.bukkit.Location
