@@ -18,16 +18,22 @@ class OnInventoryClick : Listener {
         val player = event.whoClicked as Player
         val inv = event.clickedInventory
 
+        fun buy(item: Material) {
+            event.isCancelled = true
+            player.inventory.addItem(ItemStack(item))
+            Utils.broadcastSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, .5f, 1f)
+            Utils.sendMessage(player, Component.text("You received ${item.name}!", NamedTextColor.GREEN))
+        }
+
         when (inv?.holder) {
             is ShopItems -> {
                 when (event.slot) {
                     0 -> {
-                        event.isCancelled = true
-                        player.inventory.addItem(ItemStack(Material.TNT))
-                        Utils.broadcast(Component.text("You received TNT!", NamedTextColor.GREEN))
+                        buy(Material.TNT)
                     }
                 }
             }
         }
+
     }
 }

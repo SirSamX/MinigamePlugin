@@ -1,7 +1,5 @@
 package me.sirsam.minigameplugin.commands
 
-import me.sirsam.minigameplugin.game.Game
-import me.sirsam.minigameplugin.game.Team
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -18,8 +16,6 @@ import org.bukkit.inventory.ItemStack
 class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) return true
-        Game.win(Team.RED) //TEMPORARY JUST TO TEST SRY MORITZ
-
         sender.openInventory(inventory)
 
         return true
