@@ -20,9 +20,7 @@ class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
         if (sender !is Player) return true
         Game.win(Team.RED) //TEMPORARY JUST TO TEST SRY MORITZ
 
-        val gui = Bukkit.createInventory(null, 45, Component.text("Shop", NamedTextColor.DARK_PURPLE))
-        sender.openInventory(gui)
-        gui.setItem(0, ItemStack(Material.TNT, 1))
+        sender.openInventory(inventory)
 
         return true
     }
@@ -32,6 +30,9 @@ class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
     }
 
     override fun getInventory(): Inventory {
-        return inventory
+        val gui = Bukkit.createInventory(this, 45, Component.text("Shop", NamedTextColor.DARK_PURPLE))
+        gui.setItem(0, ItemStack(Material.TNT, 1))
+
+        return gui
     }
 }

@@ -41,5 +41,6 @@ class Main : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(OnDeath(), this)
         Bukkit.getPluginManager().registerEvents(OnBreak(), this)
         Bukkit.getPluginManager().registerEvents(OnMove(), this)
+        Bukkit.getPluginManager().registerEvents(OnInventoryClick(), this)
     }
 }
