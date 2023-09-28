@@ -2,6 +2,7 @@ package me.sirsam.minigameplugin.listeners
 
 import me.sirsam.minigameplugin.helpers.Utils
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.entity.Fireball
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
