@@ -22,6 +22,6 @@ class OnInteract : Listener {
             Utils.destroy(item, 1)
         }
         val fireball = player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
-        fireball.setIsIncendiary(true)
+        fireball.setIsIncendiary(false)
     }
 }

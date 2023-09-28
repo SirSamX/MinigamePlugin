@@ -8,7 +8,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
 
 class OnProjectileHit : Listener {
-    private val explosionRadius = 5
+    private val explosionRadius = 3
 
     @EventHandler
     fun onProjectileHit(event: ProjectileHitEvent) {
@@ -21,6 +21,7 @@ class OnProjectileHit : Listener {
                         for (z in -explosionRadius..explosionRadius) {
                             val block = impactBlock.world.getBlockAt(impactBlock.x + x, impactBlock.y + y, impactBlock.z + z)
                             if (Utils.isWool(block.type)) {
+                                block.world.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, block.location, 1, 0.3, 0.3, 0.3)
                                 block.type = Material.AIR
                             }
                         }
