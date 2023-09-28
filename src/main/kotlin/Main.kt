@@ -3,7 +3,7 @@ package me.sirsam.minigameplugin
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.ShopItems
 import me.sirsam.minigameplugin.commands.Start
-import me.sirsam.minigameplugin.game.WorldController
+import me.sirsam.minigameplugin.game.controllers.WorldController
 import me.sirsam.minigameplugin.listeners.*
 import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin

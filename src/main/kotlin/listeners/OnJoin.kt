@@ -1,6 +1,6 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.game.PlayerController
+import me.sirsam.minigameplugin.game.controllers.PlayerController
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.event.EventHandler
