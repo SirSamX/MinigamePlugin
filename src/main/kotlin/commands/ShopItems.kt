@@ -2,6 +2,7 @@ package me.sirsam.minigameplugin.commands
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.command.Command
@@ -60,11 +61,13 @@ class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
 
         for (item in items) {
             val displayItem = ItemStack(item.item)
-            displayItem.lore()?.add(Component.text("Cost: ", NamedTextColor.GRAY)
+            val lore = mutableListOf<Component>()
+            lore.add(Component.text("Cost: ", NamedTextColor.GRAY)
                 .append(Component.text(item.priceAmount, item.paymentMethod.color)
                     .append(Component.text(" ").append(
                         Component.text(item.paymentMethod.priceName)
-                    ))))
+                    ))).decoration(TextDecoration.ITALIC, false))
+            displayItem.lore(lore)
             gui.setItem(item.slot, displayItem)
         }
 

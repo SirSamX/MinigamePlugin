@@ -2,8 +2,8 @@ package me.sirsam.minigameplugin.commands
 
 import me.sirsam.minigameplugin.Main
 import me.sirsam.minigameplugin.game.Game
-import me.sirsam.minigameplugin.game.controllers.PlayerController
 import me.sirsam.minigameplugin.game.Team
+import me.sirsam.minigameplugin.game.controllers.PlayerController
 import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -21,6 +21,7 @@ class Start : CommandExecutor, TabCompleter {
         if (Game.state != Game.State.INACTIVE) { return true }
 
         Game.state = Game.State.STARTING
+        Utils.broadcast(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
         Countdown().runTaskTimer(Main.instance, 0, 20)
 
         return true
@@ -31,16 +32,15 @@ class Start : CommandExecutor, TabCompleter {
 
         override fun run() {
             if (i <= 0) {
-                Utils.broadcast(Component.text("To enter a team hold the right wool color in you hand!", NamedTextColor.RED))
                 for (team in Team.values()) {
                     for (player in Bukkit.getOnlinePlayers()) {
                         val item = player.inventory.itemInMainHand.type
                         if (item == team.woolType) {
                             Game.teams[player] = team
-                            Utils.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW)))
+                            Utils.sendMessage(player,
+                                Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW))
+                            )
                             PlayerController(player).bedwarsSetup()
-                        } else {
-                            Utils.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
                         }
                     }
                 }

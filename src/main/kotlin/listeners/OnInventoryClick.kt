@@ -10,6 +10,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryType.SlotType
 import org.bukkit.inventory.ItemStack
 
 class OnInventoryClick : Listener {
@@ -32,7 +33,7 @@ class OnInventoryClick : Listener {
                     val paymentAmount = i.priceAmount
 
                     if (inventory.containsAtLeast(ItemStack(paymentMaterial), paymentAmount)) {
-                        inventory.remove(ItemStack(paymentMaterial, paymentAmount))
+                        inventory.removeItem(ItemStack(paymentMaterial, paymentAmount))
                         inventory.addItem(i.item)
                         Utils.broadcastSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, .5f, 1f)
                         Utils.sendMessage(player, Component.text("You received ", NamedTextColor.GREEN).append(i.item.displayName().append(Component.text("!", NamedTextColor.GREEN))))
@@ -41,13 +42,13 @@ class OnInventoryClick : Listener {
             }
         }
 
+        if (event.slotType == SlotType.ARMOR) {
+            event.isCancelled = true
+        }
+
         when (inv?.holder) {
             is ShopItems -> {
                 buy()
-
-                when (slot) {
-                    else -> return
-                }
             }
         }
     }

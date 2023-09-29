@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack
 
 
 class PlayerController(val player: Player) {
-    val inventory = player.inventory
+    private val inventory = player.inventory
 
     fun reset() {
         player.exp = 0f
@@ -29,26 +29,22 @@ class PlayerController(val player: Player) {
 
         val sword = ItemStack(Material.WOODEN_SWORD)
         sword.itemMeta.isUnbreakable = true
-        player.inventory.addItem(ItemStack(Material.WOODEN_SWORD))
+        player.inventory.addItem(sword)
 
-        val leatherHelmet =
-            Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_HELMET), Game.getTeamByPlayer(player)!!.color)
+        val leatherHelmet = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_HELMET), Game.getTeamByPlayer(player)!!.color)
         leatherHelmet.itemMeta.isUnbreakable = true
         leatherHelmet.addEnchantment(Enchantment.WATER_WORKER, 1)
         player.inventory.setItem(EquipmentSlot.HEAD, leatherHelmet)
 
-        val leatherChestplate =
-            Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_CHESTPLATE), Game.getTeamByPlayer(player)!!.color)
+        val leatherChestplate = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_CHESTPLATE), Game.getTeamByPlayer(player)!!.color)
         leatherChestplate.itemMeta.isUnbreakable = true
         player.inventory.setItem(EquipmentSlot.CHEST, leatherChestplate)
 
-        val leatherLeggings =
-            Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_LEGGINGS), Game.getTeamByPlayer(player)!!.color)
+        val leatherLeggings = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_LEGGINGS), Game.getTeamByPlayer(player)!!.color)
         leatherLeggings.itemMeta.isUnbreakable = true
         player.inventory.setItem(EquipmentSlot.LEGS, leatherLeggings)
 
-        val leatherBoots =
-            Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_BOOTS), Game.getTeamByPlayer(player)!!.color)
+        val leatherBoots = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_BOOTS), Game.getTeamByPlayer(player)!!.color)
         leatherBoots.itemMeta.isUnbreakable = true
         leatherBoots.addEnchantment(Enchantment.PROTECTION_FALL, 1)
         player.inventory.setItem(EquipmentSlot.FEET, leatherBoots)
