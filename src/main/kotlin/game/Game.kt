@@ -7,6 +7,7 @@ import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
 import org.bukkit.entity.Player
+import java.util.*
 
 object Game {
     enum class State {
@@ -18,13 +19,13 @@ object Game {
     }
 
     var state = State.INACTIVE
-    var teams = mutableMapOf<Player, Team>()
+    var teams = mutableMapOf<UUID, Team>()
 
     fun getTeamByPlayer(player: Player): Team? {
-        return teams[player]
+        return teams[player.uniqueId]
     }
 
-    fun getPlayersByTeam(targetTeam: Team): List<Player> {
+    fun getPlayersByTeam(targetTeam: Team): List<UUID> {
         return teams.entries
             .filter { it.value == targetTeam }
             .map { it.key }

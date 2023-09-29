@@ -1,0 +1,41 @@
+spawnLocations:
+  GREEN:
+    ==: org.bukkit.Location
+    world: world
+    x: 0.5
+    y: 66.0
+    z: -95.5
+    pitch: 0.0
+    yaw: 0.0
+  RED:
+    ==: org.bukkit.Location
+    world: world
+    x: 0.5
+    y: 66.0
+    z: 96.5
+    pitch: 0.0
+    yaw: 180.0
+  BLUE:
+    ==: org.bukkit.Location
+    world: world
+    x: 96.5
+    y: 66
+    z: 0.5
+    pitch: 0.0
+    yaw: 90.0
+  YELLOW:
+    ==: org.bukkit.Location
+    world: world
+    x: -95.5
+    y: 66.0
+    z: 0.5
+    pitch: 0.0
+    yaw: -90.0
+  NONE:
+    ==: org.bukkit.Location
+    world: world
+    x: 0.5
+    y: 95.0
+    z: 0.5
+    pitch: 0.0
+    yaw: 0.0

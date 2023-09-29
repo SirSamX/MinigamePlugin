@@ -17,7 +17,7 @@ import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class ShopItems : CommandExecutor, TabCompleter, InventoryHolder {
+class Shop : CommandExecutor, TabCompleter, InventoryHolder {
     class ShopItem(val slot: Int, val item: ItemStack, val paymentMethod: PaymentMethod, val priceAmount: Int)
     enum class PaymentMethod(val material: Material, val color: NamedTextColor, val priceName: String) {
         IRON(Material.IRON_INGOT, NamedTextColor.WHITE, "Iron"),

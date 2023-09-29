@@ -1,6 +1,6 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.commands.ShopItems
+import me.sirsam.minigameplugin.commands.Shop
 import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -17,7 +17,7 @@ class OnInventoryClick : Listener {
     @EventHandler
     fun onClick(event: InventoryClickEvent) {
         if (event.whoClicked !is Player) return
-        val items = ShopItems().items
+        val items = Shop().items
         val player = event.whoClicked as Player
         val inventory = player.inventory
         val inv = event.clickedInventory
@@ -47,7 +47,7 @@ class OnInventoryClick : Listener {
         }
 
         when (inv?.holder) {
-            is ShopItems -> {
+            is Shop -> {
                 buy()
             }
         }

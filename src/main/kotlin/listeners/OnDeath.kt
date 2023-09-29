@@ -16,12 +16,5 @@ class OnDeath : Listener {
         PlayerController(player).playerDie(player.killer)
 
         event.isCancelled = true
-        /*event.deathMessage(
-            mm.deserialize(
-            "<red>☠ <victim> <gray>was killed by <green>☠ <killer> <gray>(<red><killer_health><gray>)",
-            Placeholder.component("victim", victim.name),
-            Placeholder.component("killer", killer.name),
-            Placeholder.unparsed("killer_health", String.format("%.3f", killer.health))
-        ));*/
     }
 }

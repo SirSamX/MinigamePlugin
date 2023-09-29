@@ -32,19 +32,24 @@ class Start : CommandExecutor, TabCompleter {
 
         override fun run() {
             if (i <= 0) {
-                for (team in Team.values()) {
-                    for (player in Bukkit.getOnlinePlayers()) {
+                var foundMatch = false
+                for (player in Bukkit.getOnlinePlayers()) {
+                    for (team in Team.values()) {
                         val item = player.inventory.itemInMainHand.type
                         if (item == team.woolType) {
-                            Game.teams[player] = team
-                            Utils.sendMessage(player,
-                                Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW))
-                            )
-                            PlayerController(player).bedwarsSetup()
+                            Game.teams[player.uniqueId] = team
+                            Utils.sendMessage(player, Component.text("You were assigned to team ", NamedTextColor.YELLOW).append(team.getTeamComponeant()).append(Component.text("!", NamedTextColor.YELLOW)))
+                            PlayerController(player).setup()
+                            foundMatch = true
+                            break
                         }
+                    }
+                    if (!foundMatch) {
+                        Utils.sendMessage(player, Component.text("You were not assigned to a team!", NamedTextColor.YELLOW))
                     }
                 }
                 Utils.broadcast(Component.text("Game starts now!", NamedTextColor.YELLOW))
+                Game.state = Game.State.RUNNING
 
                 cancel()
             } else {

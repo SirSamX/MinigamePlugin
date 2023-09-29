@@ -14,8 +14,9 @@ class Reload : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>?): Boolean {
         if (sender !is Player) return true
 
-        Utils.broadcast(Component.text("RELOADING LAG!", NamedTextColor.RED).decorate(TextDecoration.BOLD))
+        Utils.broadcast(Component.text("RELOADING!", NamedTextColor.RED).decorate(TextDecoration.BOLD))
         sender.server.reload()
+        Utils.broadcast(Component.text("RELOAD COMPLETE!", NamedTextColor.GREEN).decorate(TextDecoration.BOLD))
      return true
     }
 
