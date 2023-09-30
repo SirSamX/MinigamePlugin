@@ -4,6 +4,7 @@ import me.sirsam.minigameplugin.commands.Shop
 import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
 import org.bukkit.entity.Player
