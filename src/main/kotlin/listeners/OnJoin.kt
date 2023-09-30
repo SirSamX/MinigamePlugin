@@ -1,6 +1,5 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.game.Game
 import me.sirsam.minigameplugin.game.controllers.PlayerController
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -18,10 +17,11 @@ class OnJoin : Listener {
         event.player.sendMessage(Component.text("Welcome to the MiniGames Server!", NamedTextColor.GREEN))
 
         playerController.reset()
-        if (Game.state == Game.State.INACTIVE) {
+        if (playerController.team == null) {
+            playerController.spectator()
             playerController.giveWool()
         } else {
-            playerController.setup()
+            playerController.playerDie(null)
         }
     }
 }

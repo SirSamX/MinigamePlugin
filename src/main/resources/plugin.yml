@@ -6,20 +6,18 @@ author: SirSam
 api-version: "1.20"
 
 commands:
-  start:
-    description: Starts the Game.
-    permission: op
-    permission-message: You do not have permission to use this Command!
-    usage: /<command>
   rl:
     description: Reloads the server.
     permission: op
+    permission-message: You do not have permission to use this Command!
     usage: /<command>
   shop:
     description: Opens the shop menu.
     permission: op
+    permission-message: You do not have permission to use this Command!
     usage: /<command>
   game:
     description: Game options.
     permission: op
-    usage: /<command> [start|stop]
+    permission-message: You do not have permission to use this Command!
+    usage: /<command> [start|stop|team]

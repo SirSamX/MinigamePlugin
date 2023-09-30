@@ -1,11 +1,13 @@
 package me.sirsam.minigameplugin
 
+import me.sirsam.minigameplugin.commands.GameCommand
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.Shop
-import me.sirsam.minigameplugin.commands.Start
+import me.sirsam.minigameplugin.game.Generator
 import me.sirsam.minigameplugin.game.controllers.WorldController
 import me.sirsam.minigameplugin.listeners.*
 import org.bukkit.Bukkit
+import org.bukkit.Location
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Logger
@@ -25,8 +27,12 @@ class Main : JavaPlugin() {
         config.options().copyDefaults(true)
         saveDefaultConfig()
 
+        config.set("generators", listOf(Generator(Location(server.getWorld("world"), 0.5, 80.0, 0.5), Generator.Type.BASE), Generator(Location(server.getWorld("world"), 0.5, 80.0, 0.5), Generator.Type.BASE)))
+        saveConfig()
+        Generator(Location(server.getWorld("world"), 0.5, 85.0, 0.5), Generator.Type.BASE).start()
+        Generator(Location(server.getWorld("world"), 5.5, 80.0, 0.5), Generator.Type.DIAMOND).start()
 
-
+        server.clearRecipes()
         registerCommands()
         registerEvents()
         server.worlds.forEach {
@@ -43,9 +49,10 @@ class Main : JavaPlugin() {
     }
 
     private fun registerCommands() {
-        getCommand("start")?.setExecutor(Start())
         getCommand("rl")?.setExecutor(Reload())
         getCommand("shop")?.setExecutor(Shop())
+        getCommand("game")?.setExecutor(GameCommand())
+        getCommand("game")?.tabCompleter = GameCommand()
     }
 
     private fun registerEvents() {
@@ -57,5 +64,6 @@ class Main : JavaPlugin() {
         Bukkit.getPluginManager().registerEvents(OnInventoryClick(), this)
         Bukkit.getPluginManager().registerEvents(OnInteract(), this)
         Bukkit.getPluginManager().registerEvents(OnProjectileHit(), this)
+        Bukkit.getPluginManager().registerEvents(OnBlockPlace(), this)
     }
 }

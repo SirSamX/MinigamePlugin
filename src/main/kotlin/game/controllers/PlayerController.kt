@@ -5,11 +5,13 @@ import me.sirsam.minigameplugin.game.Game
 import me.sirsam.minigameplugin.helpers.Utils
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.title.Title
 import org.bukkit.*
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
+import org.bukkit.scheduler.BukkitRunnable
 
 
 class PlayerController(val player: Player) {
@@ -23,6 +25,7 @@ class PlayerController(val player: Player) {
         player.foodLevel = 20
         player.gameMode = GameMode.SURVIVAL
         player.allowFlight = false
+        player.isInvulnerable = false
         player.inventory.clear()
     }
 
@@ -54,6 +57,9 @@ class PlayerController(val player: Player) {
     }
 
     fun playerDie(killer: Player?) {
+        spectator()
+        if (team == null) return
+
         if (killer == null) {
             Utils.broadcast(
                 Component.text(player.name, NamedTextColor.RED).append(Component.text(" died!", NamedTextColor.GRAY))
@@ -64,10 +70,30 @@ class PlayerController(val player: Player) {
                     .append(Component.text(" was killed by ${killer.name}", NamedTextColor.GRAY))
             )
         }
-        reset()
         Utils.broadcastSound(Sound.ENTITY_WOLF_HOWL, SoundCategory.PLAYERS, 1f, 1f)
+
+        player.showTitle(Title.title(Component.text("You died!", NamedTextColor.RED), if (killer == null) Component.text("") else Component.text("Killer: ${killer.name}")))
+
+        object : BukkitRunnable() {
+            var i = 5
+            override fun run() {
+                if (i == 0) {
+                    gotoSpawnLocation()
+                    setup()
+                    player.sendActionBar(Component.text(""))
+                    cancel()
+                    return
+                }
+                player.sendActionBar(Component.text("Respawning in $i secounds!", NamedTextColor.RED))
+                i--
+            }
+        }.runTaskTimer(Main.instance, 0, 20)
+    }
+
+    fun spectator() {
+        reset()
         player.gameMode = GameMode.SPECTATOR
-        player.teleport(Location(player.world, 0.5, 95.0, 0.5))
+        gotoSpawnLocation(true)
     }
 
     fun giveWool() {
@@ -77,13 +103,13 @@ class PlayerController(val player: Player) {
         inventory.addItem(ItemStack(Material.YELLOW_WOOL))
     }
 
-    fun gotoSpawnLocation() {
+    fun gotoSpawnLocation(globalSpawn: Boolean = false) {
         Bukkit.getLogger().info("Player: ${player.name}, Team: ${team?.name}")
-        player.teleport(getSpawnLocation())
+        player.teleport(getSpawnLocation(globalSpawn))
     }
 
-    fun getSpawnLocation(): Location {
-        return if (team != null) {
+    fun getSpawnLocation(globalSpawn: Boolean = false): Location {
+        return if (team != null && !globalSpawn) {
             Main.config.getLocation("spawnLocations.${team.name}")!!
         } else {
             Main.config.getLocation("spawnLocations.NONE")!!

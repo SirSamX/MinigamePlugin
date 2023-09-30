@@ -18,6 +18,7 @@ class Generator(var loc: Location, val type: Type) {
     private fun createSpawner(material: Material): BukkitRunnable {
         return object : BukkitRunnable() {
             override fun run() {
+                if (Game.state == Game.State.INACTIVE) return
                 loc.world.dropItem(loc, ItemStack(material))
             }
         }

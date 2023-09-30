@@ -1,6 +1,5 @@
 package me.sirsam.minigameplugin.listeners
 
-import me.sirsam.minigameplugin.helpers.Utils
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -20,14 +19,6 @@ class DisabledEvents : Listener {
         }
     }
 
-    /*
-    @EventHandler
-    fun onBlockPlace(event: BlockPlaceEvent) {
-        if (event.player.gameMode != GameMode.CREATIVE) {
-            event.isCancelled = true
-        }
-    }*/
-
     @EventHandler
     fun onEnchantEvent(event: EnchantItemEvent) {
         event.isCancelled = true
@@ -45,7 +36,6 @@ class DisabledEvents : Listener {
 
     @EventHandler
     fun onBlockExplode(event: BlockExplodeEvent) {
-        Utils.broadcast(event.block.type.name)
         if (event.block.type !in listOf(Material.BLUE_BED, Material.RED_BED, Material.GREEN_BED, Material.YELLOW_BED)) return
         event.isCancelled = true
     }

@@ -2,7 +2,6 @@ package me.sirsam.minigameplugin.listeners
 
 import me.sirsam.minigameplugin.game.controllers.PlayerController
 import org.bukkit.Sound
-
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent

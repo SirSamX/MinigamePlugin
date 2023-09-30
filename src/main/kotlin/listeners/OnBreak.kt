@@ -19,15 +19,16 @@ class OnBreak : Listener {
         val block = event.block
         val player = event.player
 
+        if (block.type !in listOf(Material.BLUE_WOOL, Material.GREEN_WOOL, Material.RED_WOOL, Material.YELLOW_WOOL, Material.BLUE_BED, Material.RED_BED, Material.YELLOW_BED, Material.GREEN_BED) && player.gameMode != GameMode.CREATIVE) {
+            event.isCancelled = true
+            return
+        }
+
         if (block.type in listOf(Material.BLUE_BED, Material.GREEN_BED, Material.YELLOW_BED, Material.RED_BED)) {
             val team = Team.getTeamByBedType(block.type)
 
             Utils.broadcastSound(Sound.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.MASTER, 1f, 1f)
             Utils.broadcast(Component.text(team!!.teamName, team.chatColor).decorate(TextDecoration.BOLD).append(Component.text(" bed was broken by ${event.player.name}!", NamedTextColor.RED).decoration(TextDecoration.BOLD, false)))
-        }
-
-        if (block.type !in listOf(Material.BLUE_WOOL, Material.GREEN_WOOL, Material.RED_WOOL, Material.YELLOW_WOOL) && player.gameMode != GameMode.CREATIVE) {
-            event.isCancelled = true
         }
     }
 }

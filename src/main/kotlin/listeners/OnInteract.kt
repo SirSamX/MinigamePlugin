@@ -3,9 +3,11 @@ package me.sirsam.minigameplugin.listeners
 import me.sirsam.minigameplugin.helpers.Utils
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.entity.EntityType
 import org.bukkit.entity.LargeFireball
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerInteractEntityEvent
 import org.bukkit.event.player.PlayerInteractEvent
 
 class OnInteract : Listener {
@@ -23,5 +25,18 @@ class OnInteract : Listener {
         }
         val fireball = player.launchProjectile(LargeFireball::class.java, player.eyeLocation.direction.normalize().multiply(strength))
         fireball.setIsIncendiary(false)
+    }
+
+    @EventHandler
+    fun onRightClickShop(event: PlayerInteractEntityEvent) {
+        val player = event.player
+
+        if (event.rightClicked.type == EntityType.VILLAGER) {
+            player.performCommand("shop")
+            event.isCancelled = true
+        } else if (event.rightClicked.type == EntityType.WANDERING_TRADER) {
+            player.performCommand("shop")
+            event.isCancelled = true
+        }
     }
 }

@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.inventory.meta.LeatherArmorMeta
 
 object Utils {
-    val prefix = Component.text("Minigames", NamedTextColor.YELLOW).append(Component.text(" >> ", NamedTextColor.GREEN))
+    val prefix = Component.text("Bedwars", NamedTextColor.YELLOW).append(Component.text(" >> ", NamedTextColor.GREEN))
 
     fun sendMessage(player: Player, message: Component) { player.sendMessage(prefix.append(message)) }
 

@@ -32,5 +32,6 @@ class WorldController(private val world: World) {
         world.setGameRule(GameRule.DO_VINES_SPREAD, false)
 
         world.difficulty = Difficulty.HARD
+        world.isHardcore = true
     }
 }
