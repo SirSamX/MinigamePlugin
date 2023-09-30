@@ -55,6 +55,12 @@ object Utils {
         }
     }
 
+    fun playSound(sound: Sound, soundCategory: SoundCategory, volume: Float, pitch: Float) {
+        Bukkit.getOnlinePlayers().forEach {
+            it.playSound(it, sound, soundCategory, volume, pitch)
+        }
+    }
+
     fun destroy(item: ItemStack, quantity: Int) {
         if (item.amount <= quantity) {
             item.amount = 0

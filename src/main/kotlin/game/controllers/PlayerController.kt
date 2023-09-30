@@ -29,15 +29,22 @@ class PlayerController(val player: Player) {
         player.inventory.clear()
     }
 
+    fun changeName(name: Component) {
+        player.playerListName(name)
+        player.customName(name)
+        player.displayName(name)
+    }
+
     fun setup() {
         reset()
         gotoSpawnLocation()
+        changeName(Component.text(player.name, team!!.chatColor))
 
         val sword = ItemStack(Material.WOODEN_SWORD)
         sword.itemMeta.isUnbreakable = true
         player.inventory.addItem(sword)
 
-        val leatherHelmet = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_HELMET), team!!.color)
+        val leatherHelmet = Utils.changeLeatherArmourColor(ItemStack(Material.LEATHER_HELMET), team.color)
         leatherHelmet.itemMeta.isUnbreakable = true
         leatherHelmet.addEnchantment(Enchantment.WATER_WORKER, 1)
         player.inventory.setItem(EquipmentSlot.HEAD, leatherHelmet)
@@ -67,12 +74,12 @@ class PlayerController(val player: Player) {
         } else {
             Utils.broadcast(
                 Component.text(player.name, NamedTextColor.RED)
-                    .append(Component.text(" was killed by ${killer.name}", NamedTextColor.GRAY))
+                    .append(Component.text(" was killed by ${killer.name}!", NamedTextColor.GRAY))
             )
         }
         Utils.broadcastSound(Sound.ENTITY_WOLF_HOWL, SoundCategory.PLAYERS, 1f, 1f)
 
-        player.showTitle(Title.title(Component.text("You died!", NamedTextColor.RED), if (killer == null) Component.text("") else Component.text("Killer: ${killer.name}")))
+        player.showTitle(Title.title(Component.text("You died!", NamedTextColor.RED), if (killer == null) Component.text("") else Component.text("You were killed by ${killer.name}!")))
 
         object : BukkitRunnable() {
             var i = 5

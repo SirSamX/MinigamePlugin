@@ -1,5 +1,6 @@
 package me.sirsam.minigameplugin.listeners
 
+import me.sirsam.minigameplugin.commands.Shop
 import me.sirsam.minigameplugin.helpers.Utils
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -32,10 +33,10 @@ class OnInteract : Listener {
         val player = event.player
 
         if (event.rightClicked.type == EntityType.VILLAGER) {
-            player.performCommand("shop")
+            player.openInventory(Shop().inventory)
             event.isCancelled = true
         } else if (event.rightClicked.type == EntityType.WANDERING_TRADER) {
-            player.performCommand("shop")
+            player.openInventory(Shop().inventory)
             event.isCancelled = true
         }
     }

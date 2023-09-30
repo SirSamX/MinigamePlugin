@@ -27,8 +27,6 @@ class Main : JavaPlugin() {
         config.options().copyDefaults(true)
         saveDefaultConfig()
 
-        config.set("generators", listOf(Generator(Location(server.getWorld("world"), 0.5, 80.0, 0.5), Generator.Type.BASE), Generator(Location(server.getWorld("world"), 0.5, 80.0, 0.5), Generator.Type.BASE)))
-        saveConfig()
         Generator(Location(server.getWorld("world"), 0.5, 85.0, 0.5), Generator.Type.BASE).start()
         Generator(Location(server.getWorld("world"), 5.5, 80.0, 0.5), Generator.Type.DIAMOND).start()
 
