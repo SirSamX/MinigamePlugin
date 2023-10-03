@@ -21,6 +21,6 @@ class Reload : CommandExecutor, TabCompleter {
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String>? {
-        return null
+        return mutableListOf()
     }
 }

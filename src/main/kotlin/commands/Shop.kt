@@ -9,6 +9,7 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.InventoryHolder
@@ -16,6 +17,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import org.checkerframework.checker.units.qual.Speed
 
 class Shop : CommandExecutor, TabCompleter, InventoryHolder {
     class ShopItem(val slot: Int, val item: ItemStack, val paymentMethod: PaymentMethod, val priceAmount: Int)
@@ -23,12 +25,28 @@ class Shop : CommandExecutor, TabCompleter, InventoryHolder {
         IRON(Material.IRON_INGOT, NamedTextColor.WHITE, "Iron"),
         GOLD(Material.GOLD_INGOT, NamedTextColor.GOLD, "Gold"),
         DIAMOND(Material.DIAMOND, NamedTextColor.AQUA, "Diamond"),
-        EMERALD(Material.EMERALD, NamedTextColor.DARK_GREEN, "Emerald")
+        EMERALD(Material.EMERALD, NamedTextColor.DARK_GREEN, "Emerald"),
+
     }
 
     private val speedPotion = ItemStack(Material.POTION).apply {
         val potion = this.itemMeta as PotionMeta
         potion.addCustomEffect(PotionEffect(PotionEffectType.SPEED, 900, 2), true)
+    }
+
+    private val invisibilityPotion = ItemStack(Material.POTION).apply {
+        val potion = this.itemMeta as PotionMeta
+        potion.addCustomEffect(PotionEffect(PotionEffectType.INVISIBILITY, 600, 1), true)
+    }
+
+    private val jumpPotion = ItemStack(Material.POTION).apply {
+        val potion = this.itemMeta as PotionMeta
+        potion.addCustomEffect(PotionEffect(PotionEffectType.JUMP, 900, 5), true)
+    }
+
+    private val woodenAxe = ItemStack(Material.WOODEN_AXE).apply {
+        val axe = this.itemMeta
+        axe.addEnchant(Enchantment.DIG_SPEED, 1, true)
     }
 
     val items = listOf(
@@ -42,6 +60,20 @@ class Shop : CommandExecutor, TabCompleter, InventoryHolder {
         ShopItem(28, ItemStack(Material.OAK_PLANKS), PaymentMethod.GOLD, 4),
         ShopItem(29, ItemStack(Material.IRON_SWORD), PaymentMethod.GOLD, 7),
         ShopItem(30, ItemStack(Material.IRON_BOOTS), PaymentMethod.GOLD, 12),
+        ShopItem(31, ItemStack(Material.SHEARS), PaymentMethod.IRON, 20),
+        ShopItem(32, ItemStack(Material.ARROW), PaymentMethod.GOLD, 2),
+        ShopItem(33, invisibilityPotion, PaymentMethod.EMERALD, 2),
+        ShopItem(34, ItemStack(Material.WATER_BUCKET), PaymentMethod.GOLD, 3),
+        ShopItem(37, ItemStack(Material.GOLDEN_APPLE), PaymentMethod.GOLD, 3),
+        ShopItem(38, jumpPotion, PaymentMethod.EMERALD, 1),
+        ShopItem(39, ItemStack(Material.GLASS), PaymentMethod.IRON, 12),
+        ShopItem(40, ItemStack(Material.END_STONE), PaymentMethod.IRON, 24),
+        ShopItem(41, ItemStack(Material.WOODEN_AXE), PaymentMethod.IRON, 10),
+        ShopItem(42, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
+        ShopItem(43, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
+        ShopItem(45, ItemStack(Material.COMPASS), PaymentMethod.GOLD, 0),
+        ShopItem(53, ItemStack(Material.BLAZE_POWDER), PaymentMethod.GOLD, 0),
+
     )
 
 
