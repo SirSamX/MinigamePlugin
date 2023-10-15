@@ -21,7 +21,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
 class Shop : CommandExecutor, TabCompleter, InventoryHolder {
-    private lateinit var player: Player
+    lateinit var player: Player
 
     class ShopItem(val slot: Int, val item: ItemStack, val paymentMethod: PaymentMethod, val priceAmount: Int)
 

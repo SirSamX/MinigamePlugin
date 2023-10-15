@@ -31,12 +31,14 @@ class OnInteract : Listener {
     @EventHandler
     fun onRightClickShop(event: PlayerInteractEntityEvent) {
         val player = event.player
+        val shop = Shop()
+        shop.player = player
 
         if (event.rightClicked.type == EntityType.VILLAGER) {
-            player.openInventory(Shop().inventory)
+            player.openInventory(shop.inventory)
             event.isCancelled = true
         } else if (event.rightClicked.type == EntityType.WANDERING_TRADER) {
-            player.openInventory(Shop().inventory)
+            player.openInventory(shop.inventory)
             event.isCancelled = true
         }
     }
