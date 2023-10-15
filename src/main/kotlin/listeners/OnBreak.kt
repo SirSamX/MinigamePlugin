@@ -7,7 +7,9 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
 import net.kyori.adventure.title.Title
-import org.bukkit.*
+import org.bukkit.Bukkit
+import org.bukkit.Sound
+import org.bukkit.SoundCategory
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
@@ -16,14 +18,14 @@ class OnBreak : Listener {
     @EventHandler
     fun onBlockBreak(event: BlockBreakEvent) {
         val block = event.block
-        val player = event.player
+        val material = block.type
 
-        if (block.type !in listOf(Material.BLUE_WOOL, Material.GREEN_WOOL, Material.RED_WOOL, Material.YELLOW_WOOL, Material.BLUE_BED, Material.RED_BED, Material.YELLOW_BED, Material.GREEN_BED) && player.gameMode != GameMode.CREATIVE) {
+        if (!Utils.isWoolOrBed(material)) {
             event.isCancelled = true
             return
         }
 
-        if (block.type in listOf(Material.BLUE_BED, Material.GREEN_BED, Material.YELLOW_BED, Material.RED_BED)) {
+        if (Utils.isBed(material)) {
             val team = Team.getTeamByBedType(block.type)
             if (team != null) {
                 Game.getPlayersByTeam(team).forEach {
