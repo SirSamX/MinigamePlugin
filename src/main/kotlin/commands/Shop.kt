@@ -72,7 +72,7 @@ class Shop : CommandExecutor, TabCompleter, InventoryHolder {
         ShopItem(31, ItemStack(Material.END_STONE), PaymentMethod.IRON, 24),
         ShopItem(32, woodenAxe, PaymentMethod.IRON, 10),
         ShopItem(33, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
-        ShopItem(34, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
+        ShopItem(34, ItemStack(Material.FIRE_CHARGE), PaymentMethod.IRON, 40),
     )
 
 
@@ -83,8 +83,8 @@ class Shop : CommandExecutor, TabCompleter, InventoryHolder {
         return true
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String>? {
-        return null
+    override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>?): MutableList<String> {
+        return mutableListOf()
     }
 
     override fun getInventory(): Inventory {
