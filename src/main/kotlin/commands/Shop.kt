@@ -17,7 +17,6 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import org.checkerframework.checker.units.qual.Speed
 
 class Shop : CommandExecutor, TabCompleter, InventoryHolder {
     class ShopItem(val slot: Int, val item: ItemStack, val paymentMethod: PaymentMethod, val priceAmount: Int)
@@ -26,54 +25,54 @@ class Shop : CommandExecutor, TabCompleter, InventoryHolder {
         GOLD(Material.GOLD_INGOT, NamedTextColor.GOLD, "Gold"),
         DIAMOND(Material.DIAMOND, NamedTextColor.AQUA, "Diamond"),
         EMERALD(Material.EMERALD, NamedTextColor.DARK_GREEN, "Emerald"),
-
     }
 
     private val speedPotion = ItemStack(Material.POTION).apply {
-        val potion = this.itemMeta as PotionMeta
-        potion.addCustomEffect(PotionEffect(PotionEffectType.SPEED, 900, 2), true)
+        val potionMeta = this.itemMeta as PotionMeta
+        potionMeta.addCustomEffect(PotionEffect(PotionEffectType.SPEED, 900, 1), true)
+        this.itemMeta = potionMeta
     }
 
     private val invisibilityPotion = ItemStack(Material.POTION).apply {
-        val potion = this.itemMeta as PotionMeta
-        potion.addCustomEffect(PotionEffect(PotionEffectType.INVISIBILITY, 600, 1), true)
+        val potionMeta = this.itemMeta as PotionMeta
+        potionMeta.addCustomEffect(PotionEffect(PotionEffectType.INVISIBILITY, 600, 0), true)
+        this.itemMeta = potionMeta
     }
 
     private val jumpPotion = ItemStack(Material.POTION).apply {
-        val potion = this.itemMeta as PotionMeta
-        potion.addCustomEffect(PotionEffect(PotionEffectType.JUMP, 900, 5), true)
+        val potionMeta = this.itemMeta as PotionMeta
+        potionMeta.addCustomEffect(PotionEffect(PotionEffectType.JUMP, 900, 4), true)
+        this.itemMeta = potionMeta
     }
 
     private val woodenAxe = ItemStack(Material.WOODEN_AXE).apply {
-        val axe = this.itemMeta
-        axe.addEnchant(Enchantment.DIG_SPEED, 1, true)
+        val axeMeta = this.itemMeta
+        axeMeta.addEnchant(Enchantment.DIG_SPEED, 1, true)
+        this.itemMeta = axeMeta
     }
 
     val items = listOf(
-        ShopItem(19, ItemStack(Material.WHITE_WOOL, 16), PaymentMethod.IRON, 4),
-        ShopItem(20, ItemStack(Material.STONE_SWORD), PaymentMethod.IRON, 10),
-        ShopItem(21, ItemStack(Material.CHAINMAIL_BOOTS), PaymentMethod.IRON, 30),
-        ShopItem(22, ItemStack(Material.WOODEN_PICKAXE), PaymentMethod.IRON, 10),
-        ShopItem(23, ItemStack(Material.BOW), PaymentMethod.GOLD, 12),
-        ShopItem(24, speedPotion, PaymentMethod.EMERALD, 1),
-        ShopItem(25, ItemStack(Material.TNT), PaymentMethod.GOLD, 4),
-        ShopItem(28, ItemStack(Material.OAK_PLANKS), PaymentMethod.GOLD, 4),
-        ShopItem(29, ItemStack(Material.IRON_SWORD), PaymentMethod.GOLD, 7),
-        ShopItem(30, ItemStack(Material.IRON_BOOTS), PaymentMethod.GOLD, 12),
-        ShopItem(31, ItemStack(Material.SHEARS), PaymentMethod.IRON, 20),
-        ShopItem(32, ItemStack(Material.ARROW), PaymentMethod.GOLD, 2),
-        ShopItem(33, invisibilityPotion, PaymentMethod.EMERALD, 2),
-        ShopItem(34, ItemStack(Material.WATER_BUCKET), PaymentMethod.GOLD, 3),
-        ShopItem(37, ItemStack(Material.GOLDEN_APPLE), PaymentMethod.GOLD, 3),
-        ShopItem(38, jumpPotion, PaymentMethod.EMERALD, 1),
-        ShopItem(39, ItemStack(Material.GLASS), PaymentMethod.IRON, 12),
-        ShopItem(40, ItemStack(Material.END_STONE), PaymentMethod.IRON, 24),
-        ShopItem(41, ItemStack(Material.WOODEN_AXE), PaymentMethod.IRON, 10),
-        ShopItem(42, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
-        ShopItem(43, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
-        ShopItem(45, ItemStack(Material.COMPASS), PaymentMethod.GOLD, 0),
-        ShopItem(53, ItemStack(Material.BLAZE_POWDER), PaymentMethod.GOLD, 0),
-
+        ShopItem(10, ItemStack(Material.WHITE_WOOL, 16), PaymentMethod.IRON, 4),
+        ShopItem(11, ItemStack(Material.STONE_SWORD), PaymentMethod.IRON, 10),
+        ShopItem(12, ItemStack(Material.CHAINMAIL_BOOTS), PaymentMethod.IRON, 30),
+        ShopItem(13, ItemStack(Material.WOODEN_PICKAXE), PaymentMethod.IRON, 10),
+        ShopItem(14, ItemStack(Material.BOW), PaymentMethod.GOLD, 12),
+        ShopItem(15, speedPotion, PaymentMethod.EMERALD, 1),
+        ShopItem(16, ItemStack(Material.TNT), PaymentMethod.GOLD, 4),
+        ShopItem(19, ItemStack(Material.OAK_PLANKS), PaymentMethod.GOLD, 4),
+        ShopItem(20, ItemStack(Material.IRON_SWORD), PaymentMethod.GOLD, 7),
+        ShopItem(21, ItemStack(Material.IRON_BOOTS), PaymentMethod.GOLD, 12),
+        ShopItem(22, ItemStack(Material.SHEARS), PaymentMethod.IRON, 20),
+        ShopItem(23, ItemStack(Material.ARROW), PaymentMethod.GOLD, 2),
+        ShopItem(24, invisibilityPotion, PaymentMethod.EMERALD, 2),
+        ShopItem(25, ItemStack(Material.WATER_BUCKET), PaymentMethod.GOLD, 3),
+        ShopItem(28, ItemStack(Material.GOLDEN_APPLE), PaymentMethod.GOLD, 3),
+        ShopItem(29, jumpPotion, PaymentMethod.EMERALD, 1),
+        ShopItem(30, ItemStack(Material.GLASS), PaymentMethod.IRON, 12),
+        ShopItem(31, ItemStack(Material.END_STONE), PaymentMethod.IRON, 24),
+        ShopItem(32, woodenAxe, PaymentMethod.IRON, 10),
+        ShopItem(33, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
+        ShopItem(34, ItemStack(Material.BOW), PaymentMethod.GOLD, 20),
     )
 
 

@@ -25,10 +25,8 @@ class OnInventoryClick : Listener {
         val inv = event.clickedInventory
         val slot = event.slot
 
-        fun buyArmour(name: String, color: NamedTextColor, paymentMaterial: Material, paymentAmount: Int) {
+        fun buyArmour(name: String, color: NamedTextColor) {
             Utils.sendMessage(player, Component.text("You received ", NamedTextColor.GREEN).append(Component.text(name + " Armour", color).append(Component.text("!", NamedTextColor.GREEN))))
-            Utils.playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, .5f, 1f)
-            inventory.removeItem(ItemStack(paymentMaterial, paymentAmount))
         }
 
         fun buy() {
@@ -39,42 +37,44 @@ class OnInventoryClick : Listener {
                     val paymentMaterial = i.paymentMethod.material
                     val paymentAmount = i.priceAmount
 
-                    when (i.item.type) {
-                        Material.CHAINMAIL_BOOTS -> {
-                            player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.CHAINMAIL_BOOTS))
-                            player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.CHAINMAIL_LEGGINGS))
-                            buyArmour("Chainmail", NamedTextColor.GRAY, paymentMaterial, paymentAmount)
-                            return
-                        }
-
-                        Material.IRON_BOOTS -> {
-                            player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.IRON_BOOTS))
-                            player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.IRON_LEGGINGS))
-                            buyArmour("Iron", NamedTextColor.WHITE, paymentMaterial, paymentAmount)
-                            return
-                        }
-
-                        Material.DIAMOND_BOOTS -> {
-                            player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.DIAMOND_BOOTS))
-                            player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.DIAMOND_LEGGINGS))
-                            buyArmour("Diamond", NamedTextColor.AQUA, paymentMaterial, paymentAmount)
-                            return
-                        }
-
-                        Material.NETHERITE_BOOTS -> {
-                            player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.NETHERITE_BOOTS))
-                            player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.NETHERITE_LEGGINGS))
-                            buyArmour("Netherite", NamedTextColor.DARK_GRAY, paymentMaterial, paymentAmount)
-                            return
-                        }
-                        else -> {}
-                    }
-
                     if (inventory.containsAtLeast(ItemStack(paymentMaterial), paymentAmount)) {
                         inventory.removeItem(ItemStack(paymentMaterial, paymentAmount))
-                        inventory.addItem(i.item)
+
+                        when (i.item.type) {
+                            Material.CHAINMAIL_BOOTS -> {
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.CHAINMAIL_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.CHAINMAIL_LEGGINGS))
+                                buyArmour("Chainmail", NamedTextColor.GRAY)
+                                return
+                            }
+
+                            Material.IRON_BOOTS -> {
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.IRON_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.IRON_LEGGINGS))
+                                buyArmour("Iron", NamedTextColor.WHITE)
+                                return
+                            }
+
+                            Material.DIAMOND_BOOTS -> {
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.DIAMOND_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.DIAMOND_LEGGINGS))
+                                buyArmour("Diamond", NamedTextColor.AQUA)
+                                return
+                            }
+
+                            Material.NETHERITE_BOOTS -> {
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.NETHERITE_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.NETHERITE_LEGGINGS))
+                                buyArmour("Netherite", NamedTextColor.DARK_GRAY)
+                                return
+                            }
+                            else -> {
+                                inventory.addItem(i.item)
+                                Utils.sendMessage(player, Component.text("You received ", NamedTextColor.GREEN).append(i.item.displayName().append(Component.text("!", NamedTextColor.GREEN))))
+                            }
+                        }
+
                         Utils.broadcastSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, .5f, 1f)
-                        Utils.sendMessage(player, Component.text("You received ", NamedTextColor.GREEN).append(i.item.displayName().append(Component.text("!", NamedTextColor.GREEN))))
                     }
                 }
             }

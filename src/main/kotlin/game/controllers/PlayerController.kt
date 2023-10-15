@@ -37,7 +37,7 @@ class PlayerController(val player: Player) {
 
     fun setup() {
         reset()
-        gotoSpawnLocation()
+        gotoSpawn()
         changeName(Component.text(player.name, team!!.chatColor))
 
         val sword = ItemStack(Material.WOODEN_SWORD)
@@ -85,7 +85,7 @@ class PlayerController(val player: Player) {
             var i = 5
             override fun run() {
                 if (i == 0) {
-                    gotoSpawnLocation()
+                    gotoSpawn()
                     setup()
                     player.sendActionBar(Component.text(""))
                     cancel()
@@ -100,7 +100,7 @@ class PlayerController(val player: Player) {
     fun spectator() {
         reset()
         player.gameMode = GameMode.SPECTATOR
-        gotoSpawnLocation(true)
+        gotoSpawn(true)
     }
 
     fun giveWool() {
@@ -109,13 +109,21 @@ class PlayerController(val player: Player) {
         inventory.addItem(ItemStack(Material.BLUE_WOOL))
         inventory.addItem(ItemStack(Material.YELLOW_WOOL))
     }
-
-    fun gotoSpawnLocation(globalSpawn: Boolean = false) {
+    
+    fun gotoSpawn(globalSpawn: Boolean = false) {
         Bukkit.getLogger().info("Player: ${player.name}, Team: ${team?.name}")
-        player.teleport(getSpawnLocation(globalSpawn))
+        player.teleport(getSpawn(globalSpawn))
     }
 
-    fun getSpawnLocation(globalSpawn: Boolean = false): Location {
+    fun gotoLobby() {
+        player.teleport(getLobbySpawn())
+    }
+
+    private fun getLobbySpawn(): Location {
+        return Main.config.getLocation("spawnLocations.LOBBY")!!
+    }
+
+    private fun getSpawn(globalSpawn: Boolean = false): Location {
         return if (team != null && !globalSpawn) {
             Main.config.getLocation("spawnLocations.${team.name}")!!
         } else {

@@ -1,13 +1,16 @@
 package me.sirsam.minigameplugin
 
 import me.sirsam.minigameplugin.commands.GameCommand
+import me.sirsam.minigameplugin.commands.LobbyCommand
 import me.sirsam.minigameplugin.commands.Reload
 import me.sirsam.minigameplugin.commands.Shop
 import me.sirsam.minigameplugin.game.Generator
 import me.sirsam.minigameplugin.game.controllers.WorldController
+import me.sirsam.minigameplugin.game.map.MinigameWorld
 import me.sirsam.minigameplugin.listeners.*
 import org.bukkit.Bukkit
 import org.bukkit.Location
+import org.bukkit.WorldCreator
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.logging.Logger
@@ -27,8 +30,13 @@ class Main : JavaPlugin() {
         config.options().copyDefaults(true)
         saveDefaultConfig()
 
-        Generator(Location(server.getWorld("world"), 0.5, 85.0, 0.5), Generator.Type.BASE).start()
-        Generator(Location(server.getWorld("world"), 5.5, 80.0, 0.5), Generator.Type.DIAMOND).start()
+        Bukkit.createWorld(WorldCreator("bedwars"))
+
+        val bedwarsWorld = MinigameWorld.BEDWARS.world
+        Generator(Location(bedwarsWorld, 0.5, 66.0, -95.5), Generator.Type.BASE).start()
+        Generator(Location(bedwarsWorld, 0.5, 66.0, 95.5), Generator.Type.BASE).start()
+        Generator(Location(bedwarsWorld, -95.5, 66.0, 0.5), Generator.Type.BASE).start()
+        Generator(Location(bedwarsWorld, 95.5, 66.0, 0.5), Generator.Type.BASE).start()
 
         server.clearRecipes()
         registerCommands()
@@ -51,6 +59,7 @@ class Main : JavaPlugin() {
         getCommand("shop")?.setExecutor(Shop())
         getCommand("game")?.setExecutor(GameCommand())
         getCommand("game")?.tabCompleter = GameCommand()
+        getCommand("lobby")?.setExecutor(LobbyCommand())
     }
 
     private fun registerEvents() {

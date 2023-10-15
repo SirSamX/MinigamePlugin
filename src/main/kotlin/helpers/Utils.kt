@@ -19,7 +19,7 @@ object Utils {
 
     fun sendMessage(players: List<Player>, message: Component) { players.forEach { p ->  p.sendMessage(prefix.append(message)) } }
 
-    fun broadcast(message: Component) { Bukkit.getOnlinePlayers().forEach { p -> p.sendMessage(prefix.append(message)) } }
+    fun broadcast(message: Component) { Bukkit.broadcast(prefix.append(message)) }
 
     @Deprecated("Use Component instead of String!")
     fun broadcast(message: String) { Bukkit.getOnlinePlayers().forEach { p -> p.sendMessage(prefix.append(PlainTextComponentSerializer.plainText().deserialize(message))) } }

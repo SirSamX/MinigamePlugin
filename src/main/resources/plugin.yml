@@ -21,3 +21,9 @@ commands:
     permission: op
     permission-message: You do not have permission to use this Command!
     usage: /<command> [start|stop|team]
+  lobby:
+    description: Teleports you to the lobby.
+    usage: /<command>
+    aliases:
+      - l
+      - hub

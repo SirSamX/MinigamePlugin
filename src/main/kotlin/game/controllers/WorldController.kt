@@ -1,8 +1,6 @@
 package me.sirsam.minigameplugin.game.controllers
 
-import org.bukkit.Difficulty
-import org.bukkit.GameRule
-import org.bukkit.World
+import org.bukkit.*
 
 class WorldController(private val world: World) {
     fun setup() {
@@ -33,5 +31,11 @@ class WorldController(private val world: World) {
 
         world.difficulty = Difficulty.HARD
         world.isHardcore = true
+        world.isAutoSave = false
+    }
+
+    fun reset() {
+        Bukkit.unloadWorld(world, false)
+        Bukkit.createWorld(WorldCreator(world.name))
     }
 }
