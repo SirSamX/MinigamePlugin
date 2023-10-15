@@ -35,7 +35,11 @@ class WorldController(private val world: World) {
     }
 
     fun reset() {
-        Bukkit.unloadWorld(world, false)
+        unload(false)
         Bukkit.createWorld(WorldCreator(world.name))
+    }
+
+    fun unload(save: Boolean) {
+        Bukkit.unloadWorld(world, save)
     }
 }
