@@ -30,7 +30,7 @@ class Generator(var loc: Location, val type: Type) {
         when (type) {
             Type.BASE -> {
                 spawnerTasks.add(createSpawner(Material.IRON_INGOT).apply {
-                    runTaskTimer(plugin, 0, 10)
+                    runTaskTimer(plugin, 0, 14)
                 })
                 spawnerTasks.add(createSpawner(Material.GOLD_INGOT).apply {
                     runTaskTimer(plugin, 0, 160)
