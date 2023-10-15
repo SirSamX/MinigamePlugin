@@ -51,6 +51,7 @@ class Main : JavaPlugin() {
     }
 
     override fun onDisable() {
+        WorldController(MinigameWorld.BEDWARS.world).unload(false)
         logger.info("Plugin disabled!")
     }
 
