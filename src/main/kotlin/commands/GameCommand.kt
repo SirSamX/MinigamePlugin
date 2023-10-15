@@ -59,6 +59,16 @@ class GameCommand : CommandExecutor, TabCompleter {
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, label: String, args: Array<out String>): MutableList<String> {
-        return mutableListOf("start", "stop", /*"team", */"reset", "warp")
+        return when {
+            args[0].isEmpty() -> {
+                mutableListOf("start", "stop", "team", "reset", "warp")
+            }
+
+            args[0] == "team" -> {
+                mutableListOf("red", "green", "yellow", "blue")
+            }
+
+            else -> mutableListOf()
+        }
     }
 }
