@@ -61,6 +61,7 @@ class Main : JavaPlugin() {
         getCommand("game")?.setExecutor(GameCommand())
         getCommand("game")?.tabCompleter = GameCommand()
         getCommand("lobby")?.setExecutor(LobbyCommand())
+        getCommand("lobby")?.tabCompleter = LobbyCommand()
     }
 
     private fun registerEvents() {
