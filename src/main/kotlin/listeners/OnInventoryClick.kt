@@ -7,6 +7,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.SoundCategory
+import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -42,32 +43,41 @@ class OnInventoryClick : Listener {
 
                         when (i.item.type) {
                             Material.CHAINMAIL_BOOTS -> {
-                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.CHAINMAIL_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.CHAINMAIL_BOOTS).apply {
+                                    this.itemMeta.addEnchant(Enchantment.PROTECTION_FALL, 1, false)
+                                })
                                 player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.CHAINMAIL_LEGGINGS))
                                 buyArmour("Chainmail", NamedTextColor.GRAY)
                                 return
                             }
 
                             Material.IRON_BOOTS -> {
-                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.IRON_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.IRON_BOOTS).apply {
+                                    this.itemMeta.addEnchant(Enchantment.PROTECTION_FALL, 1, false)
+                                })
                                 player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.IRON_LEGGINGS))
                                 buyArmour("Iron", NamedTextColor.WHITE)
                                 return
                             }
 
                             Material.DIAMOND_BOOTS -> {
-                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.DIAMOND_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.DIAMOND_BOOTS).apply {
+                                    this.itemMeta.addEnchant(Enchantment.PROTECTION_FALL, 1, false)
+                                })
                                 player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.DIAMOND_LEGGINGS))
                                 buyArmour("Diamond", NamedTextColor.AQUA)
                                 return
                             }
 
                             Material.NETHERITE_BOOTS -> {
-                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.NETHERITE_BOOTS))
+                                player.inventory.setItem(EquipmentSlot.FEET, ItemStack(Material.NETHERITE_BOOTS).apply {
+                                    this.itemMeta.addEnchant(Enchantment.PROTECTION_FALL, 1, false)
+                                })
                                 player.inventory.setItem(EquipmentSlot.LEGS, ItemStack(Material.NETHERITE_LEGGINGS))
                                 buyArmour("Netherite", NamedTextColor.DARK_GRAY)
                                 return
                             }
+
                             else -> {
                                 inventory.addItem(i.item)
                                 Utils.sendMessage(player, Component.text("You received ", NamedTextColor.GREEN).append(i.item.displayName().append(Component.text("!", NamedTextColor.GREEN))))
